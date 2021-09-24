@@ -11,8 +11,7 @@ const server = new ApolloServer({
     typeDefs,
     resolvers,
     cors: {
-        origin: '*',
-        credentials: true
+        origin: '*'
     },
     context: ({ req }) => {
         const token = req.headers['authorization'] || ''
