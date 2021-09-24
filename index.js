@@ -10,12 +10,14 @@ conn()
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+    cors: {
+        origin: '*',
+        credentials: true
+    },
     context: ({ req }) => {
         const token = req.headers['authorization'] || ''
         if(token) {
             try {
-                console.log('Bearer: ', token)
-                console.log('Token: ',token.replace('Bearer ',''))
                 const user = jwt.verify(token.replace('Bearer ',''), process.env.USER_SECRETE)
                 return { user }
             }

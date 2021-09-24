@@ -301,7 +301,7 @@ const resolvers = {
                 for await ( const row of input.order) {
                     const { id } = row
                     const product = await Product.findById(id)
-                    console.log(product.stock < row.quantity,product.stock, row.quantity)
+                    
                     if(product.stock < row.quantity) {
                         throw new Error(`Your order of ${product.name} exceeds the quantity available.`)
                     } 
@@ -324,7 +324,7 @@ const resolvers = {
             try {
                 const existsOrder =  await Order.findById(id)
                 if(!existsOrder) throw new Error('Order not found')
-                console.log('input',input)
+                
                 const dbClient = await Client.findById(input.client)
                 if(!dbClient) throw new Error('Client not found')
                 
